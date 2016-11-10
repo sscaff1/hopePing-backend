@@ -1,6 +1,8 @@
 'use strict';
 const authentication = require('./authentication');
 const user = require('./user');
+const feed = require('./feed');
+const news = require('./new');
 const mongoose = require('mongoose');
 module.exports = function() {
   const app = this;
@@ -10,4 +12,6 @@ module.exports = function() {
 
   app.configure(authentication);
   app.configure(user);
+  app.configure(feed);
+  app.configure(news);
 };
