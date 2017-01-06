@@ -12,7 +12,7 @@ module.exports = function() {
   const config = app.get('auth');
   config.facebook.Strategy = FacebookStrategy;
   app.set('auth', config);
-  app.configure(authentication({ secret: config.secret, shouldSetupSuccessRoute: false }));
+  app.configure(authentication({ secret: config.secret }));
   app.configure(jwt());
   app.configure(oauth2(config.facebook));
   app.service('authentication').hooks({
