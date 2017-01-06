@@ -1,26 +1,25 @@
 'use strict';
 
 const authentication = require('feathers-authentication');
+const oauth2 = require('feathers-authentication-oauth2');
+const jwt = require('feathers-authentication-jwt');
 
 const FacebookStrategy = require('passport-facebook').Strategy;
-const FacebookTokenStrategy = require('passport-facebook-token');
-const GoogleStrategy = require('passport-google-oauth20').Strategy;
-const GoogleTokenStrategy = require('passport-google-token').Strategy;
-const LinkedinStrategy = require('passport-linkedin-oauth2').Strategy;
-const LinkedinTokenStrategy = require('passport-linkedin-token-oauth2').Strategy;
 
 module.exports = function() {
   const app = this;
 
-  let config = app.get('auth');
-  
-  config.facebook.strategy = FacebookStrategy;
-  config.facebook.tokenStrategy = FacebookTokenStrategy;
-  config.google.strategy = GoogleStrategy;
-  config.google.tokenStrategy = GoogleTokenStrategy;
-  config.linkedin.strategy = LinkedinStrategy;
-  config.linkedin.tokenStrategy = LinkedinTokenStrategy;
-
+  const config = app.get('auth');
+  config.facebook.Strategy = FacebookStrategy;
   app.set('auth', config);
-  app.configure(authentication(config));
+  app.configure(authentication({ secret: config.secret, shouldSetupSuccessRoute: false }));
+  app.configure(jwt());
+  app.configure(oauth2(config.facebook));
+  app.service('authentication').hooks({
+    before: {
+      create: [
+        authentication.hooks.authenticate('jwt'),
+      ]
+    }
+  });
 };

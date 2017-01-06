@@ -4,6 +4,8 @@ const user = require('./user');
 const feed = require('./feed');
 const news = require('./new');
 const mongoose = require('mongoose');
+const stripe = require('./stripe');
+
 module.exports = function() {
   const app = this;
 
@@ -14,4 +16,5 @@ module.exports = function() {
   app.configure(user);
   app.configure(feed);
   app.configure(news);
+  app.configure(stripe);
 };
