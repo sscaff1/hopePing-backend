@@ -1,15 +1,13 @@
 'use strict';
 
 const hooks = require('feathers-hooks');
-const auth = require('feathers-authentication').hooks;
+const auth = require('feathers-authentication');
 const getNews = require('./getNews');
 
 const TOPIC = 'homeless';
 
 exports.before = {
-  all: [
-    // auth.verifyToken(),
-  ],
+  all: [],
   find: [
     getNews(TOPIC),
   ],
