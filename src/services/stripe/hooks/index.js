@@ -15,7 +15,7 @@ exports.before = {
     getToken(),
   ],
   create: [
-    hooks.disable(),
+    hook => console.log(hook),
   ],
   update: [
     hooks.disable(),
