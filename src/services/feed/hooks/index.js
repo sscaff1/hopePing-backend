@@ -3,13 +3,12 @@ const hooks = require('feathers-hooks');
 const auth = require('feathers-authentication').hooks;
 const getFeed = require('./getFeed');
 
-const PAGE_ID = '102800004322';
 exports.before = {
   all: [
     // auth.verifyToken(),
   ],
   find: [
-    getFeed(PAGE_ID)
+    getFeed(),
   ],
   get: [
     hooks.disable(),
