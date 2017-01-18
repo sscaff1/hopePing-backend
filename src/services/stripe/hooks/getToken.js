@@ -1,6 +1,6 @@
 module.exports = function() {
   return function getToken(hook) {
     hook.result = hook.app.get('stripe').publishKey;
-    return hook;
+    return Promise.resolve(hook);
   }
 }

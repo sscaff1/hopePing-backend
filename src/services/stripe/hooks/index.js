@@ -3,6 +3,8 @@
 const hooks = require('feathers-hooks');
 const auth = require('feathers-authentication');
 const getToken = require('./getToken');
+const createCustomer = require('./createCustomer');
+const chargeCard = require('./chargeCard');
 
 exports.before = {
   all: [],
@@ -11,7 +13,9 @@ exports.before = {
     getToken(),
   ],
   create: [
-
+    createCustomer(),
+    chargeCard(),
+    hook => console.log(hook.result),
   ],
   update: [
     hooks.disable(),
