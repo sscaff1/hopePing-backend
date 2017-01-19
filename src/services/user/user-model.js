@@ -5,6 +5,7 @@ const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
   facebookId: { type: String },
+  stripeId: { type: String },
   facebook: { type: Schema.Types.Mixed },
   createdAt: { type: Date, 'default': Date.now },
   updatedAt: { type: Date, 'default': Date.now }

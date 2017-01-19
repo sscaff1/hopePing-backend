@@ -7,14 +7,14 @@ module.exports = function() {
     const { user } = hook.params;
     if (!user.stripeId) {
       return client.customers.create({
-        description: user.profile.displayName,
+        description: user.facebook.profile.displayName,
         source: hook.data.stripeToken.id
       })
       .then(customer => {
-        hook.app.services('user').patch(user._id, { stripeId: customer.id });
         hook.result = Object.assign({}, { customer });
-        return hook;
+        return hook.app.service('users').patch(user._id, { stripeId: customer.id });
       })
+      .then(() => hook)
       .catch(error => console.log(error));
     }
     return client.customers.update(user.stripeId, {

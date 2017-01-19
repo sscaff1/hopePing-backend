@@ -15,7 +15,6 @@ exports.before = {
   create: [
     createCustomer(),
     chargeCard(),
-    hook => console.log(hook.result),
   ],
   update: [
     hooks.disable(),
