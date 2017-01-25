@@ -20,7 +20,8 @@
     "jshint": "jshint src/. test/. --config",
     "start": "node src/",
     "watch": "nodemon --inspect src/",
-    "mocha": "mocha test/ --recursive"
+    "mocha": "mocha test/ --recursive",
+    "production": "forever start src/"
   },
   "dependencies": {
     "body-parser": "^1.15.2",
@@ -46,6 +47,7 @@
     "winston": "^2.2.0"
   },
   "devDependencies": {
+    "forever-monitor": "^1.7.1",
     "jshint": "^2.9.2",
     "mocha": "^2.5.3",
     "nodemon": "^1.9.2",
